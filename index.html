@@ -1,0 +1,155 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+    <title>Yummy</title>
+</head>
+
+<body>
+    <!-- loud -->
+    <div class="loud position-fixed top-0 start-0 end-0 bottom-0 w-100 h-100"
+        style="background-color: black; z-index: 9999999999999;">
+        <span class="loader"></span>
+    </div>
+    <!-- end loud -->
+    <!-- NavBar -->
+    <div class="sideNavBar position-fixed top-0 bottom-0 vh-100 d-none">
+        <div class="navBody bg-dark vh-100 d-flex flex-column justify-content-between align-items-center">
+            <div class="navTags w-100 ms-4">
+                <h5 style=" cursor: pointer !important; overflow: hidden; width:0px " class="text-start text-white my-4"
+                    id="search">search
+                </h5>
+                <h5 style=" cursor: pointer !important; overflow: hidden; width:0px " class="text-start text-white my-4"
+                    id="Categories">
+                    Categories</h5>
+                <h5 style=" cursor: pointer !important; overflow: hidden; width:0px " class="text-start text-white my-4"
+                    id="Area">Area</h5>
+                <h5 style=" cursor: pointer !important; overflow: hidden; width:0px " class="text-start text-white my-4"
+                    id="Ingredients">
+                    Ingredients</h5>
+                <h5 style=" cursor: pointer !important; overflow: hidden; width:0px " class="text-start text-white my-4"
+                    id="Contact">Contact</h5>
+            </div>
+            <div class="copyRight w-100 ms-4">
+                <i style=" cursor: pointer !important;" class="fa-brands fa-facebook text-white"></i>
+                <i style=" cursor: pointer !important;" class="fa-brands fa-twitter text-white"></i>
+                <i style=" cursor: pointer !important;" class="fa-solid fa-globe text-white"></i>
+                <br>
+                <h5 class="text-white">Copyright Â© 2019 All Rights Reserved.</h5>
+            </div>
+        </div>
+        <nav class="vh-100 bg-light d-flex flex-column justify-content-between align-items-center">
+            <img src="img/logo.png" alt="logo" class="w-100" id="logoIMG">
+            <i style="cursor: pointer !important;" class="fa-solid fa-bars fs-1" onclick="navBtn()" id="navBtn"></i>
+            <div class="mb-4">
+                <i style="cursor: pointer !important;" class="fa-solid fa-globe d-block mb-2"></i>
+                <i style="cursor: pointer !important;" class="fa-solid fa-share-nodes mt-2"></i>
+            </div>
+        </nav>
+    </div>
+    <!-- End Navbar -->
+    <!-- mail search -->
+    <div class="maiSearch mt-3 justify-content-around align-items-center">
+        <input type="text" class="form-control text-white bg-dark " placeholder="search by name" id="mailSearch">
+        <input type="text" class="form-control text-white bg-dark " placeholder="search by first litter"
+            id="firstLitterSearch">
+    </div>
+    <!-- End mail search -->
+    <!-- mail product -->
+    <div class="container w-100 mt-" id="container1">
+        <div class="row gy-5" id="product">
+        </div>
+    </div>
+    <!--  end mail product -->
+    <!-- productInfo -->
+    <div class="container " id="container2">
+        <div class="row w-100 mt-5" id="productInfo">
+        </div>
+    </div>
+    <!-- end productInfo -->
+    <!-- category -->
+    <div class="container mt-5 w-100" id="container3">
+        <div class="row" id="categoryRow">
+        </div>
+    </div>
+    <!-- End category -->
+    <!-- Area Meal -->
+    <div class="container mt-5 w-100" id="container4">
+        <div class="row g-4" id="AreaRow">
+        </div>
+    </div>
+    <!-- End Area Meal -->
+    <!-- Ingredients -->
+    <div class="container mt-5 w-100" id="container5">
+        <div class="row g-4" id="IngredientsRow">
+        </div>
+    </div>
+    <!-- end Ingredients -->
+    <!-- contact -->
+    <div class="container" id="container6">
+        <div class="row py-5 g-4 " id="rowData">
+            <div class="contact min-vh-100 d-flex justify-content-center align-items-center">
+                <div class="container w-75 text-center">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <input id="nameInput" type="text" class=" bg-dark text-white form-control w-100"
+                                placeholder="Enter Your Name">
+                            <div id="nameAlert" class="alert alert-danger w-100 mt-2 d-none">
+                                Special characters and numbers not allowed
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="emailInput" type="email" class=" bg-dark text-white form-control w-100 "
+                                placeholder="Enter Your Email">
+                            <div id="emailAlert" class="alert alert-danger w-100 mt-2 d-none">
+                                Email not valid *exemple@yyy.zzz
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="phoneInput" type="text" class=" bg-dark text-white form-control w-100 "
+                                placeholder="Enter Your Phone">
+                            <div id="phoneAlert" class="alert alert-danger w-100 mt-2 d-none">
+                                Enter valid Phone Number
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="ageInput" type="number" class=" bg-dark text-white form-control w-100 "
+                                placeholder="Enter Your Age">
+                            <div id="ageAlert" class="alert alert-danger w-100 mt-2 d-none">
+                                Enter valid age
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="passwordInput" type="password" class=" bg-dark text-white form-control w-100 "
+                                placeholder="Enter Your Password">
+                            <div id="passwordAlert" class="alert alert-danger w-100 mt-2 d-none">
+                                Enter valid password *Minimum eight characters, at least one letter and one number:*
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="rePasswordInput" type="password" class=" bg-dark text-white form-control w-100 "
+                                placeholder="Repassword">
+                            <div id="rePasswordAlert" class="alert alert-danger w-100 mt-2 d-none">
+                                password not equal
+                            </div>
+                        </div>
+                    </div>
+                    <button id="submitBtn" disabled class="btn btn-outline-danger px-2 mt-3">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end contact -->
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/all.js"></script>
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

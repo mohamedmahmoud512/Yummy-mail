@@ -1,0 +1,29 @@
+@media (max-width: 767px) {
+    img {
+        width: 108%;
+
+    }
+
+    .maleName {
+        height: 96%;
+    }
+
+    .col-md-3:hover .maleName {
+        bottom: 4%;
+    }
+}
+
+@media(min-width: 767px) and (max-width: 991px) {
+    img {
+        width: 109%;
+
+    }
+
+    .maleName {
+        height: 87%;
+    }
+
+    .col-md-3:hover .maleName {
+        bottom: 13%;
+    }
+}
