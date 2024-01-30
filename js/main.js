@@ -254,7 +254,7 @@ mailSearch.addEventListener("keydown", function () {
     getData(URL, mailSearch.value);
     $("#container1").show(400);
 })
-firstLitterSearch.addEventListener("keydown", function () {
+firstLitterSearch.addEventListener("keyup", function () {
     getData(URL, firstLitterSearch.value);
     $("#container1").show(400);
 });
