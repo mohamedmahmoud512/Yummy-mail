@@ -1,5 +1,5 @@
 "use strict"
-let URL = "https://www.themealdb.com/api/json/v1/1/search.php?s"
+// document ID
 const product = document.getElementById("product");
 const categoryRow = document.getElementById("categoryRow");
 const IngredientsRow = document.getElementById("IngredientsRow");
@@ -25,6 +25,8 @@ const ageAlert = document.getElementById("ageAlert");
 const passwordAlert = document.getElementById("passwordAlert");
 const rePasswordAlert = document.getElementById("rePasswordAlert");
 const submitBtn = document.getElementById("submitBtn");
+// variable 
+let URL = "https://www.themealdb.com/api/json/v1/1/search.php?s"
 let productArray = [];
 let categoryArray = [];
 let AreaArray = [];
@@ -32,22 +34,29 @@ let AreaProd = [];
 let AreaResult = [];
 let IngredientsMeals = [];
 let isClick = true;
+// call function
 getData(URL);
 getCateData();
 getIngredientsMeals();
 mailList();
+// ready loud
 $(document).ready(function () {
-    $(".loud").slideUp(400, function () {
+    $(".loud").hide(1000, function () {
         document.body.style.overflow = "auto";
     })
-})
+});
 // ====================================================
+// validate sign in
 function validateName() {
     let regex = /^[a-zA-Z\s]+$/;
     if (!regex.test(nameInput.value)) {
         nameAlert.classList.remove("d-none");
         return false;
-    } else {
+    } else if (nameInput.value == "") {
+        nameAlert.classList.add("d-none");
+        return false;
+    }
+    else {
         nameAlert.classList.add("d-none");
         return true;
     }
@@ -57,7 +66,11 @@ function validateEmail() {
     if (!regex.test(emailInput.value)) {
         emailAlert.classList.remove("d-none");
         return false;
-    } else {
+    } else if (emailInput.value == "") {
+        emailAlert.classList.add("d-none");
+        return false;
+    }
+    else {
         emailAlert.classList.add("d-none");
         return true;
     }
@@ -67,7 +80,11 @@ function validatePass() {
     if (!regex.test(passwordInput.value)) {
         passwordAlert.classList.remove("d-none");
         return false;
-    } else {
+    } else if (passwordInput.value == "") {
+        passwordAlert.classList.add("d-none");
+        return false;
+    }
+    else {
         passwordAlert.classList.add("d-none");
         return true;
     }
@@ -76,67 +93,82 @@ function rePassValidate() {
     if (passwordInput.value != rePasswordInput.value) {
         rePasswordAlert.classList.remove("d-none")
         return false;
-    } else {
+    } else if (rePasswordInput.value == "") {
+        rePasswordAlert.classList.add("d-none");
+        return false;
+    }
+    else {
         rePasswordAlert.classList.add("d-none")
         return true;
     }
 }
 function phoneInputValid() {
-    let regex = /^01[0125]\d{8}$/;
+    let regex = /^(\+201|01|00201)[0-2,5]{1}[0-9]{8}/;
     if (!regex.test(phoneInput.value)) {
         phoneAlert.classList.remove("d-none");
         return false;
-    } else {
+    } else if (phoneInput.value == "") {
+        phoneAlert.classList.add("d-none");
+        return false;
+    }
+    else {
         phoneAlert.classList.add("d-none");
         return true;
     }
 }
 function ageInputValid() {
-    let regex = /^(1[89]|[2-9]\d)$/;
-    if (!regex.test(ageInput.value)) {
+    if (ageInput.value > 90 || ageInput.value < 18) {
         ageAlert.classList.remove("d-none");
         return false;
-    } else {
+    } else if (ageInput.value == "") {
+        ageAlert.classList.add("d-none");
+        return false;
+    }
+    else {
         ageAlert.classList.add("d-none");
         return true;
     }
 }
-nameInput.addEventListener("keydown", function () {
+nameInput.addEventListener("keypress", function () {
     validateName();
+    submit();
 })
-emailInput.addEventListener("keydown", function () {
+emailInput.addEventListener("keypress", function () {
     validateEmail();
+    submit();
 })
-passwordInput.addEventListener("keydown", function () {
+passwordInput.addEventListener("keypress", function () {
     validatePass();
+    submit();
 })
-rePasswordInput.addEventListener("keydown", function () {
+rePasswordInput.addEventListener("keyup", function () {
     rePassValidate()
+    submit();
 })
-phoneInput.addEventListener("keydown", function () {
+phoneInput.addEventListener("keyup", function () {
     phoneInputValid()
+    submit();
 })
-ageInput.addEventListener("keydown", function () {
+ageInput.addEventListener("keyup", function () {
     ageInputValid()
-})
-submitBtn.addEventListener("click", function () {
     submit();
 })
 function submit() {
     if (validateName() && validateEmail() && validatePass() && rePassValidate() && phoneInputValid() && ageInputValid()) {
         submitBtn.removeAttribute("disabled");
+    }
+    submitBtn.addEventListener("click", function () {
         nameInput.value = "";
         emailInput.value = "";
         passwordInput.value = "";
         rePasswordInput.value = "";
         ageInput.value = "";
         phoneInput.value = "";
-    }
-}
-if (validateName() && validateEmail() && validatePass() && rePassValidate() && phoneInputValid() && ageInputValid()) {
-    submitBtn.removeAttribute("disabled");
+        submitBtn.setAttribute("disabled","true");
+    })
 }
 // ====================================================
+// nav bar click 
 document.getElementById("logoIMG").addEventListener("click", function () {
     location.reload();
 });
@@ -179,7 +211,7 @@ Area.addEventListener("click", function () {
     $("#container6").hide(400);
     $(".maiSearch").hide(400);
     document.querySelector(".maiSearch").classList.add("d-none");
-    $("#container4").slideDown(500, function () {
+    $("#container4").slideDown(100, function () {
         $(".sideNavBar").animate({ left: "-285px" }, 700);
         $("#navBtn").toggleClass("fa-bars");
         isClick = true;
@@ -216,6 +248,8 @@ Contact.addEventListener("click", function () {
         hideTaps();
     });
 })
+// =========================================================================
+// search
 mailSearch.addEventListener("keydown", function () {
     getData(URL, mailSearch.value);
     $("#container1").show(400);
@@ -231,6 +265,7 @@ firstLitterSearch.addEventListener("input", function (event) {
     }
 
 });
+// tab nav bar show
 function showTabs() {
     $(".navTags").show(300, function () {
         $("#search").animate({ width: "100%" }, function () {
@@ -272,6 +307,8 @@ function navBtn() {
         hideTaps();
     }
 }
+// ==================================================
+// API data
 async function getData(URL, category = "") {
     fetch(`${URL}=${category}`)
         .then(response => {
@@ -328,6 +365,38 @@ function mailList() {
             displayArea();
         })
 }
+async function getPrdArea(prod) {
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${prod}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (let i = 0; i < data.meals.length; i++) {
+                AreaProd.push(data.meals[i])
+            }
+            displayPrdArea()
+        })
+}
+async function getIngredientsMeals() {
+    fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (let i = 0; i < 24; i++) {
+                IngredientsMeals.push(data.meals[i]);
+            }
+            displayIngredientsMeals();
+        })
+
+}
+// display data
 function display(prod) {
     let cartoona = "";
     for (let i = 0; i < prod.length; i++) {
@@ -380,6 +449,44 @@ function displayArea() {
     AreaRow.innerHTML = cartoona;
     eventAreaClick();
 }
+function displayPrdArea() {
+    let cartoona = "";
+    for (let i = 0; i < AreaProd.length; i++) {
+        cartoona += `
+        <div class="col-md-3 overflow-hidden position-relative" key="${AreaProd[i].idMeal}" data-mailName="${AreaProd[i].strMeal}">
+        <img src="${AreaProd[i].strMealThumb}" alt="${AreaProd[i].strMeal}" key="${AreaProd[i].idMeal}" data-mailName="${AreaProd[i].strMeal}">;
+        <div class="maleName d-flex justify-content-center align-items-center fs-1" key="${AreaProd[i].idMeal}" data-mailName="${AreaProd[i].strMeal}">
+            ${AreaProd[i].strMeal}
+        </div>
+    </div>
+        `
+    }
+    product.innerHTML = cartoona;
+    eventProdAreaClick()
+    $("#container1").slideDown(1000, function () {
+        $("#container4").hide(400);
+        $(".sideNavBar").removeClass("d-none");
+        $(".sideNavBar").addClass("d-flex");
+        $(".sideNavBar").animate({ left: "-285px" }, 500);
+    });
+}
+function displayIngredientsMeals() {
+    let cartoona = "";
+    for (let i = 0; i < 24; i++) {
+        cartoona += `
+        <div class="col-md-3">
+                <div class="rounded-2 text-center cursor-pointer" key="${IngredientsMeals[i].idIngredient}">
+                    <i class="fa-solid fa-drumstick-bite fa-4x text-white" key="${IngredientsMeals[i].idIngredient}"></i>
+                    <h3 key="${IngredientsMeals[i].idIngredient}">${IngredientsMeals[i].strIngredient}</h3>
+                    <p key="${IngredientsMeals[i].idIngredient}">${IngredientsMeals[i].strDescription.split(" ").slice(0, 20).join(" ")}</p>
+                </div>
+            </div>
+        `
+    }
+    IngredientsRow.innerHTML = cartoona;
+    IngredientsEvent()
+}
+// event data click
 function eventClick() {
     let productClick = $(".col-md-3")
     for (let i = 0; i < productClick.length; i++) {
@@ -404,50 +511,14 @@ function eventAreaClick() {
         })
     }
 }
-async function getPrdArea(prod) {
-    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${prod}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            for (let i = 0; i < data.meals.length; i++) {
-                AreaProd.push(data.meals[i])
-            }
-            displayPrdArea()
-        })
-}
-function displayPrdArea() {
-    let cartoona = "";
-    for (let i = 0; i < AreaProd.length; i++) {
-        cartoona += `
-        <div class="col-md-3 overflow-hidden position-relative" key="${AreaProd[i].idMeal}" data-mailName="${AreaProd[i].strMeal}">
-        <img src="${AreaProd[i].strMealThumb}" alt="${AreaProd[i].strMeal}" key="${AreaProd[i].idMeal}" data-mailName="${AreaProd[i].strMeal}">;
-        <div class="maleName d-flex justify-content-center align-items-center fs-1" key="${AreaProd[i].idMeal}" data-mailName="${AreaProd[i].strMeal}">
-            ${AreaProd[i].strMeal}
-        </div>
-    </div>
-        `
-    }
-    product.innerHTML = cartoona;
-    eventProdAreaClick()
-    $("#container1").slideDown(1000, function () {
-        $("#container4").hide(400);
-        $(".sideNavBar").removeClass("d-none");
-        $(".sideNavBar").addClass("d-flex");
-        $(".sideNavBar").animate({ left: "-285px" }, 500);
-    });
-}
 function eventProdAreaClick() {
     let AreaArray = document.querySelectorAll(".col-md-3");
     for (let i = 0; i < AreaArray.length; i++) {
         AreaArray[i].addEventListener("click", async function (e) {
-            await getAreaData(URL, e.target.getAttribute("data-mailName"));
+            await getAreaData(URL, e.target.getAttribute("data-mailName")); //=================
             for (let i = 0; i < AreaResult.length; i++) {
                 if (e.target.getAttribute("data-mailName") == AreaResult[i].strMeal) {
-                    $("#container4").hide(400);
+                    $("#container4").hide(700);
                     showMoreInfo(AreaResult[i]);
                 }
             }
@@ -469,6 +540,23 @@ function CateEventClick() {
         })
     }
 }
+function IngredientsEvent() {
+    let productClick = $(".col-md-3")
+    for (let i = 0; i < productClick.length; i++) {
+        productClick[i].addEventListener("click", function (e) {
+            for (let i = 0; i < IngredientsMeals.length; i++) {
+                if (e.target.getAttribute("key") == IngredientsMeals[i].idIngredient) {
+                    productArray.length = 0;
+                    getData(URL, IngredientsMeals[i].strIngredient);
+                    $("#container5").slideUp(500, function () {
+                        $("#container1").show(400);
+                    })
+                }
+            }
+        })
+    }
+}
+//more information about  the foods
 function showMoreInfo(Recipes) {
     let objectArr = Object.values(Recipes)
     let strMeasure = [];
@@ -514,50 +602,4 @@ function showMoreInfo(Recipes) {
     });
     productInfo.innerHTML = cartoona;
 }
-async function getIngredientsMeals() {
-    fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            for (let i = 0; i < 24; i++) {
-                IngredientsMeals.push(data.meals[i]);
-            }
-            displayIngredientsMeals();
-        })
-
-}
-function displayIngredientsMeals() {
-    let cartoona = "";
-    for (let i = 0; i < 24; i++) {
-        cartoona += `
-        <div class="col-md-3">
-                <div class="rounded-2 text-center cursor-pointer" key="${IngredientsMeals[i].idIngredient}">
-                    <i class="fa-solid fa-drumstick-bite fa-4x text-white" key="${IngredientsMeals[i].idIngredient}"></i>
-                    <h3 key="${IngredientsMeals[i].idIngredient}">${IngredientsMeals[i].strIngredient}</h3>
-                    <p key="${IngredientsMeals[i].idIngredient}">${IngredientsMeals[i].strDescription.split(" ").slice(0, 20).join(" ")}</p>
-                </div>
-            </div>
-        `
-    }
-    IngredientsRow.innerHTML = cartoona;
-    IngredientsEvent()
-}
-function IngredientsEvent() {
-    let productClick = $(".col-md-3")
-    for (let i = 0; i < productClick.length; i++) {
-        productClick[i].addEventListener("click", function (e) {
-            for (let i = 0; i < IngredientsMeals.length; i++) {
-                if (e.target.getAttribute("key") == IngredientsMeals[i].idIngredient) {
-                    getData(URL, IngredientsMeals[i].strIngredient);
-                    $("#container5").slideUp(500, function () {
-                        $("#container1").show(400);
-                    })
-                }
-            }
-        })
-    }
-}
+// =================================== End code (●'◡'●) ==========================================
