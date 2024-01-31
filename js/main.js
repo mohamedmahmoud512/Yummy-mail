@@ -515,6 +515,7 @@ function eventProdAreaClick() {
     let AreaArray = document.querySelectorAll(".col-md-3");
     for (let i = 0; i < AreaArray.length; i++) {
         AreaArray[i].addEventListener("click", async function (e) {
+            AreaProd.length=0;
             await getAreaData(URL, e.target.getAttribute("data-mailName")); //=================
             for (let i = 0; i < AreaResult.length; i++) {
                 if (e.target.getAttribute("data-mailName") == AreaResult[i].strMeal) {
