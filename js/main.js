@@ -40,7 +40,7 @@ getCateData();
 getIngredientsMeals();
 mailList();
 // ready loud
-$(document).ready(function () {
+document.addEventListener("ready", function () {
     $(".loud").hide(1000, function () {
         document.body.style.overflow = "auto";
     })
