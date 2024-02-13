@@ -316,7 +316,7 @@ function navBtn() {
 // ==================================================
 // API data
 async function getData(URL, category = "") {
-    fetch(`${URL}=${category}`)
+    await fetch(`${URL}=${category}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -333,7 +333,7 @@ async function getData(URL, category = "") {
         })
 }
 async function getAreaData(URL, category = "") {
-    fetch(`${URL}=${category}`)
+    await fetch(`${URL}=${category}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -349,7 +349,7 @@ async function getAreaData(URL, category = "") {
         })
 }
 async function getCateData() {
-    fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
+    await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -362,8 +362,8 @@ async function getCateData() {
             louder();
         })
 }
-function mailList() {
-    fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`)
+async function mailList() {
+    await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -380,7 +380,7 @@ function mailList() {
         })
 }
 async function getPrdArea(prod) {
-    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${prod}`)
+    await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${prod}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -397,7 +397,7 @@ async function getPrdArea(prod) {
         })
 }
 async function getIngredientsMeals() {
-    fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
+    await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
