@@ -34,17 +34,23 @@ let AreaProd = [];
 let AreaResult = [];
 let IngredientsMeals = [];
 let isClick = true;
+let isLoud = false;
 // call function
 getData(URL);
 getCateData();
 getIngredientsMeals();
 mailList();
+louder();
 // ready loud
-$("document").ready( function () {
-    $(".loud").hide(1000, function () {
-        document.body.style.overflow = "auto";
-    })
-});
+function louder() {
+    $("document").ready(function () {
+        if (!isLoud) {
+            $(".loud").hide(1000, function () {
+                document.body.style.overflow = "auto";
+            })
+        };
+    });
+}
 // ====================================================
 // validate sign in
 function validateName() {
@@ -164,7 +170,7 @@ function submit() {
         rePasswordInput.value = "";
         ageInput.value = "";
         phoneInput.value = "";
-        submitBtn.setAttribute("disabled","true");
+        submitBtn.setAttribute("disabled", "true");
     })
 }
 // ====================================================
@@ -321,6 +327,8 @@ async function getData(URL, category = "") {
             display(data.meals);
             for (let i = 0; i < data.meals.length; i++) {
                 productArray.push(data.meals[i]);
+                isLoud = true;
+                louder();
             }
         })
 }
@@ -335,6 +343,8 @@ async function getAreaData(URL, category = "") {
         .then(data => {
             for (let i = 0; i < data.meals.length; i++) {
                 AreaResult.push(data.meals[i]);
+                isLoud = true;
+                louder();
             }
         })
 }
@@ -348,6 +358,8 @@ async function getCateData() {
         })
         .then(data => {
             displayCate(data.categories);
+            isLoud = true;
+            louder();
         })
 }
 function mailList() {
@@ -362,6 +374,8 @@ function mailList() {
             for (let i = 0; i < data.meals.length; i++) {
                 AreaArray.push(data.meals[i].strArea);
             }
+            isLoud = true;
+            louder();
             displayArea();
         })
 }
@@ -377,6 +391,8 @@ async function getPrdArea(prod) {
             for (let i = 0; i < data.meals.length; i++) {
                 AreaProd.push(data.meals[i])
             }
+            isLoud = true;
+            louder();
             displayPrdArea()
         })
 }
@@ -392,6 +408,8 @@ async function getIngredientsMeals() {
             for (let i = 0; i < 24; i++) {
                 IngredientsMeals.push(data.meals[i]);
             }
+            isLoud = true;
+            louder();
             displayIngredientsMeals();
         })
 
@@ -515,7 +533,7 @@ function eventProdAreaClick() {
     let AreaArray = document.querySelectorAll(".col-md-3");
     for (let i = 0; i < AreaArray.length; i++) {
         AreaArray[i].addEventListener("click", async function (e) {
-            AreaProd.length=0;
+            AreaProd.length = 0;
             await getAreaData(URL, e.target.getAttribute("data-mailName")); //=================
             for (let i = 0; i < AreaResult.length; i++) {
                 if (e.target.getAttribute("data-mailName") == AreaResult[i].strMeal) {
