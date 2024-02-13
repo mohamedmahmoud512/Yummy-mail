@@ -374,9 +374,9 @@ function mailList() {
             for (let i = 0; i < data.meals.length; i++) {
                 AreaArray.push(data.meals[i].strArea);
             }
+            displayArea();
             isLoud = true;
             louder();
-            displayArea();
         })
 }
 async function getPrdArea(prod) {
@@ -391,9 +391,9 @@ async function getPrdArea(prod) {
             for (let i = 0; i < data.meals.length; i++) {
                 AreaProd.push(data.meals[i])
             }
+            displayPrdArea()
             isLoud = true;
             louder();
-            displayPrdArea()
         })
 }
 async function getIngredientsMeals() {
@@ -408,12 +408,11 @@ async function getIngredientsMeals() {
             for (let i = 0; i < 24; i++) {
                 IngredientsMeals.push(data.meals[i]);
             }
+            displayIngredientsMeals();
             isLoud = true;
             louder();
-            displayIngredientsMeals();
         })
-
-}
+};
 // display data
 function display(prod) {
     let cartoona = "";
